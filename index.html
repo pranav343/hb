@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hii Blend — Cold-Pressed Juices, Smoothies & Protein Blends</title>
+<meta name="description" content="Hii Blend, Khan Market, New Delhi — cold-pressed juices, wellness shots, supermatcha, smoothies, sandwiches and wraps, made fresh daily. Dine in or order home delivery." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#F3F7F0;
+    --ink:#122B1D;
+    --ink-soft:#3D5546;
+    --leaf:#2C6E49;
+    --leaf-dark:#1C4A31;
+    --beet:#A4243B;
+    --citrus:#E8B547;
+    --card:#FFFFFF;
+    --line:rgba(18,43,29,.12);
+    --radius:20px;
+    --display:"Bricolage Grotesque",sans-serif;
+    --body:"Instrument Sans",sans-serif;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--beet);color:#fff}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:min(1160px,92%);margin-inline:auto}
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(243,247,240,.85);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+    transition:box-shadow .3s var(--ease);
+  }
+  header.scrolled{box-shadow:0 6px 24px rgba(18,43,29,.08)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+  .logo{font-family:var(--display);font-weight:800;font-size:1.45rem;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
+  .logo .dot{width:12px;height:12px;border-radius:50%;background:var(--beet);display:inline-block;animation:pulse 3s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+  nav ul{display:flex;gap:34px;list-style:none;align-items:center}
+  nav a.link{font-weight:500;font-size:.95rem;position:relative;padding:4px 0;color:var(--ink-soft);transition:color .25s}
+  nav a.link::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:2px;background:var(--beet);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
+  nav a.link:hover{color:var(--ink)}
+  nav a.link:hover::after{transform:scaleX(1);transform-origin:left}
+  .btn{
+    display:inline-block;background:var(--leaf-dark);color:#fff;font-weight:600;font-size:.95rem;
+    padding:12px 26px;border-radius:100px;border:none;cursor:pointer;
+    transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s;
+  }
+  .btn:hover{background:var(--beet);transform:translateY(-2px);box-shadow:0 10px 24px rgba(164,36,59,.28)}
+  .burger{display:none;background:none;border:none;cursor:pointer;font-size:1.6rem;color:var(--ink)}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:84px 0 60px;position:relative}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--leaf);border:1px solid var(--line);border-radius:100px;
+    padding:7px 16px;background:#fff;margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--citrus)}
+  h1{
+    font-family:var(--display);font-weight:800;letter-spacing:-.03em;
+    font-size:clamp(2.6rem,5.4vw,4.4rem);line-height:1.04;margin-bottom:22px;
+  }
+  h1 .beet{color:var(--beet);font-style:italic;font-weight:700}
+  .hero p.lede{font-size:1.13rem;color:var(--ink-soft);max-width:46ch;margin-bottom:34px}
+  .hero-cta{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .btn-ghost{
+    display:inline-block;font-weight:600;font-size:.95rem;padding:12px 26px;border-radius:100px;
+    border:1.5px solid var(--ink);color:var(--ink);transition:all .3s var(--ease);
+  }
+  .btn-ghost:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+  .hero-stats{display:flex;gap:38px;margin-top:46px}
+  .hero-stats div strong{font-family:var(--display);font-size:1.5rem;font-weight:700;display:block}
+  .hero-stats div span{font-size:.85rem;color:var(--ink-soft)}
+  .hero-visual{position:relative}
+  .hero-visual .frame{
+    border-radius:32px;overflow:hidden;aspect-ratio:4/4.6;
+    box-shadow:0 30px 60px rgba(18,43,29,.18);
+    transform:rotate(1.5deg);transition:transform .6s var(--ease);
+  }
+  .hero-visual:hover .frame{transform:rotate(0deg) scale(1.01)}
+  .hero-visual .frame img{width:100%;height:100%;object-fit:cover}
+  .badge{
+    position:absolute;left:-28px;bottom:38px;background:var(--beet);color:#fff;border-radius:50%;
+    width:128px;height:128px;display:grid;place-items:center;text-align:center;
+    font-family:var(--display);font-weight:700;font-size:.82rem;line-height:1.25;padding:14px;
+    box-shadow:0 14px 30px rgba(164,36,59,.35);
+    animation:float 5s ease-in-out infinite;
+  }
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-12px) rotate(-2deg)}}
+
+  /* ---------- Ingredient marquee (signature) ---------- */
+  .ticker{
+    background:var(--leaf-dark);color:var(--paper);overflow:hidden;padding:16px 0;
+    transform:rotate(-1.2deg) scale(1.02);margin:26px 0 10px;
+  }
+  .ticker-track{display:flex;width:max-content;animation:scroll 32s linear infinite}
+  .ticker:hover .ticker-track{animation-play-state:paused}
+  .ticker span{
+    font-family:var(--display);font-weight:600;font-size:1.02rem;letter-spacing:.02em;
+    white-space:nowrap;padding:0 14px;display:flex;align-items:center;gap:26px;
+  }
+  .ticker i{font-style:normal;color:var(--citrus)}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* ---------- Sections ---------- */
+  section{padding:88px 0}
+  .sec-head{max-width:640px;margin-bottom:52px}
+  .sec-head .eyebrow{margin-bottom:16px}
+  h2{font-family:var(--display);font-weight:800;letter-spacing:-.025em;font-size:clamp(1.9rem,3.6vw,2.9rem);line-height:1.1;margin-bottom:14px}
+  .sec-head p{color:var(--ink-soft);font-size:1.05rem}
+
+  /* ---------- Menu ---------- */
+  #menu{padding-top:70px}
+  .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+  .chip{
+    background:#fff;border:1px solid var(--line);border-radius:100px;padding:9px 20px;
+    font-family:var(--body);font-weight:600;font-size:.9rem;color:var(--ink-soft);cursor:pointer;
+    transition:all .3s var(--ease);
+  }
+  .chip:hover{border-color:var(--leaf);color:var(--leaf)}
+  .chip.active{background:var(--ink);border-color:var(--ink);color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .card{
+    background:var(--card);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);
+    transition:transform .45s var(--ease),box-shadow .45s var(--ease),opacity .4s var(--ease);
+    display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-8px);box-shadow:0 24px 48px rgba(18,43,29,.14)}
+  .card.hide{display:none}
+  .card-img{aspect-ratio:4/3;overflow:hidden;position:relative;background:linear-gradient(135deg,#DCE9DA,#F0E6D2)}
+  .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+  .card:hover .card-img img{transform:scale(1.07)}
+  .card-img .fallback{
+    position:absolute;inset:0;display:none;place-items:center;
+    font-family:var(--display);font-weight:800;font-size:3rem;color:var(--leaf-dark);
+  }
+  .card-img.broken img{display:none}
+  .card-img.broken .fallback{display:grid}
+  .tag{
+    position:absolute;top:14px;left:14px;background:rgba(255,255,255,.92);backdrop-filter:blur(4px);
+    border-radius:100px;padding:5px 13px;font-size:.72rem;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--leaf-dark);
+  }
+  .card-body{padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .card-body h3{font-family:var(--display);font-weight:700;font-size:1.22rem;letter-spacing:-.01em}
+  .card-body p{font-size:.92rem;color:var(--ink-soft);flex:1}
+  .ing{font-size:.8rem;color:var(--leaf);font-weight:600}
+  .meta{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--line);padding-top:14px;margin-top:4px}
+  .kcal{font-size:.8rem;color:var(--ink-soft)}
+  .price{font-family:var(--display);font-weight:800;font-size:1.18rem;color:var(--beet)}
+  .price small{font-size:.72rem;font-weight:600;color:var(--ink-soft)}
+  .menu-note{margin-top:34px;font-size:.9rem;color:var(--ink-soft);text-align:center}
+
+  /* ---------- Why ---------- */
+  #why{background:var(--leaf-dark);color:var(--paper);border-radius:44px;margin:20px auto;width:min(1240px,96%)}
+  #why h2{color:#fff}
+  #why .sec-head p{color:rgba(243,247,240,.75)}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .why-card{border:1px solid rgba(243,247,240,.16);border-radius:var(--radius);padding:30px 26px;transition:background .35s var(--ease),transform .35s var(--ease)}
+  .why-card:hover{background:rgba(243,247,240,.07);transform:translateY(-4px)}
+  .why-card .ico{font-size:1.8rem;margin-bottom:16px;display:block}
+  .why-card h3{font-family:var(--display);font-weight:700;font-size:1.15rem;margin-bottom:8px;color:#fff}
+  .why-card p{font-size:.93rem;color:rgba(243,247,240,.72)}
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .about-grid .frame{border-radius:28px;overflow:hidden;aspect-ratio:4/3.4;box-shadow:0 24px 50px rgba(18,43,29,.15)}
+  .about-grid .frame img{width:100%;height:100%;object-fit:cover}
+  .about-copy p{color:var(--ink-soft);margin-bottom:16px}
+
+  /* ---------- Contact ---------- */
+  #contact{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .contact-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+  .contact-card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(18,43,29,.1)}
+  .contact-card h3{font-family:var(--display);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+  .contact-card p{font-size:.95rem;color:var(--ink-soft)}
+  .contact-card a{color:var(--beet);font-weight:600}
+
+  /* ---------- Policies ---------- */
+  #policies{padding-top:70px}
+  details.policy{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    margin-bottom:14px;overflow:hidden;transition:box-shadow .3s var(--ease);
+  }
+  details.policy[open]{box-shadow:0 14px 30px rgba(18,43,29,.08)}
+  details.policy summary{
+    cursor:pointer;list-style:none;padding:22px 26px;display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--display);font-weight:700;font-size:1.08rem;
+  }
+  details.policy summary::-webkit-details-marker{display:none}
+  details.policy summary::after{content:"+";font-size:1.5rem;color:var(--beet);transition:transform .35s var(--ease)}
+  details.policy[open] summary::after{transform:rotate(45deg)}
+  .policy-body{padding:0 26px 26px;color:var(--ink-soft);font-size:.95rem}
+  .policy-body h4{color:var(--ink);margin:16px 0 6px;font-size:.98rem}
+  .policy-body ul{padding-left:20px;margin:8px 0}
+  .policy-body li{margin-bottom:6px}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--ink);color:rgba(243,247,240,.75);padding:64px 0 34px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px;margin-bottom:46px}
+  footer .logo{color:#fff;margin-bottom:14px}
+  footer p{font-size:.92rem}
+  footer h4{font-family:var(--display);color:#fff;font-size:.95rem;margin-bottom:16px;letter-spacing:.03em}
+  footer ul{list-style:none}
+  footer ul li{margin-bottom:10px}
+  footer ul a{font-size:.9rem;transition:color .25s}
+  footer ul a:hover{color:var(--citrus)}
+  .foot-bottom{border-top:1px solid rgba(243,247,240,.14);padding-top:24px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.83rem}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:960px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .hero-grid,.about-grid{grid-template-columns:1fr;gap:44px}
+    .why-grid,.contact-grid{grid-template-columns:1fr 1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .badge{left:auto;right:-10px}
+  }
+  @media (max-width:640px){
+    nav ul{
+      position:fixed;inset:64px 0 auto 0;background:var(--paper);flex-direction:column;gap:0;
+      border-bottom:1px solid var(--line);padding:10px 0 20px;
+      transform:translateY(-130%);transition:transform .45s var(--ease);
+    }
+    nav ul.open{transform:none}
+    nav ul li{width:100%;text-align:center;padding:12px 0}
+    .burger{display:block}
+    .nav .btn{display:none}
+    .grid,.why-grid,.contact-grid,.foot-grid{grid-template-columns:1fr}
+    .hero{padding-top:56px}
+    section{padding:64px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="wrap nav">
+    <a href="#top" class="logo"><span class="dot"></span>Hii Blend</a>
+    <nav>
+      <ul id="navlinks">
+        <li><a class="link" href="#menu">Menu</a></li>
+        <li><a class="link" href="#why">Why Hii Blend</a></li>
+        <li><a class="link" href="#about">About</a></li>
+        <li><a class="link" href="#contact">Contact</a></li>
+        <li><a class="link" href="#policies">Policies</a></li>
+      </ul>
+    </nav>
+    <a href="#menu" class="btn">Order now</a>
+    <button class="burger" id="burger" aria-label="Open menu">☰</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow reveal in">Khan Market, New Delhi ・ Pressed fresh daily</span>
+        <h1 class="reveal in">Real produce.<br/>Nothing else.<br/><span class="beet">Just blend it.</span></h1>
+        <p class="lede reveal in d1">Cold-pressed juices, wellness shots, supermatcha, smoothies, sandwiches and wraps — made fresh at Khan Market, New Delhi. No added sugar, no preservatives, no shortcuts.</p>
+        <div class="hero-cta reveal in d2">
+          <a href="#menu" class="btn">Explore the menu</a>
+          <a href="#about" class="btn-ghost">Our story</a>
+        </div>
+        <div class="hero-stats reveal in d3">
+          <div><strong>20+</strong><span>blends on the menu</span></div>
+          <div><strong>0g</strong><span>added sugar</span></div>
+          <div><strong>24h</strong><span>press-to-bottle window</span></div>
+        </div>
+      </div>
+      <div class="hero-visual reveal in d2">
+        <div class="frame">
+          <img src="https://images.unsplash.com/photo-1622597467836-f3285f2131b8?auto=format&fit=crop&w=900&q=80" alt="Fresh smoothies and juices made from whole fruit" onerror="this.parentElement.classList.add('broken')" />
+          <div class="fallback">HB</div>
+        </div>
+        <div class="badge">100% FRESH ・ PRESSED DAILY</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INGREDIENT TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="ticker">
+      <span>Matcha <i>◆</i> Kale <i>◆</i> Beetroot <i>◆</i> Ginger <i>◆</i> Turmeric <i>◆</i> Spinach <i>◆</i> Carrot <i>◆</i> Orange <i>◆</i> Apple <i>◆</i> Cucumber <i>◆</i> Celery <i>◆</i> Coconut Water <i>◆</i> Purple Cabbage <i>◆</i> Banana <i>◆</i> Peanut Butter <i>◆</i> Dark Cocoa <i>◆</i> Cayenne <i>◆</i> Cinnamon <i>◆</i> </span>
+    </div>
+  </div>
+
+  <!-- MENU -->
+  <section id="menu">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">The menu</span>
+        <h2>Blended for how you want to feel</h2>
+        <p>Every recipe lists exactly what goes in it — ingredients, calories and price. What you see is what you sip.</p>
+      </div>
+
+      <div class="filters reveal" id="filters">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="shot">Wellness Shots</button>
+        <button class="chip" data-filter="juice">Cold-Pressed Juices</button>
+        <button class="chip" data-filter="matcha">Supermatcha</button>
+        <button class="chip" data-filter="hydrate">Hydrate</button>
+        <button class="chip" data-filter="smoothie">Smoothies</button>
+        <button class="chip" data-filter="protein">Protein Blends</button>
+        <button class="chip" data-filter="food">Sandwiches &amp; Wraps</button>
+      </div>
+
+      <div class="grid" id="menuGrid">
+
+        <!-- SHOTS -->
+        <article class="card reveal" data-cat="shot">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1610970881699-44a5587cabec?auto=format&fit=crop&w=800&q=80" alt="Immunity booster shot with ginger and turmeric" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">IB</div>
+            <span class="tag">Wellness Shot</span>
+          </div>
+          <div class="card-body">
+            <h3>Immunity Booster Shot</h3>
+            <p>A fiery 60&nbsp;ml shot to kick-start your immune system every morning.</p>
+            <span class="ing">Ginger ・ Turmeric ・ Lemon ・ Black Pepper</span>
+            <div class="meta"><span class="kcal">39 kcal</span><span class="price">₹125</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal d1" data-cat="shot">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=800&q=80" alt="Metabolism shot with cayenne and cinnamon" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">MB</div>
+            <span class="tag">Wellness Shot</span>
+          </div>
+          <div class="card-body">
+            <h3>Metabolism Fire Shot</h3>
+            <p>Cayenne heat and cinnamon warmth to wake your metabolism right up.</p>
+            <span class="ing">Cayenne ・ Cinnamon ・ Apple Cider ・ Honey</span>
+            <div class="meta"><span class="kcal">34 kcal</span><span class="price">₹125</span></div>
+          </div>
+        </article>
+
+        <!-- JUICES -->
+        <article class="card reveal d2" data-cat="juice">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1610970881699-44a5587cabec?auto=format&fit=crop&w=800&q=80" alt="Green cold-pressed juice with kale and celery" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">GG</div>
+            <span class="tag">Cold-Pressed</span>
+          </div>
+          <div class="card-body">
+            <h3>Green Guardian</h3>
+            <p>Antioxidant-rich greens pressed slow and cold to keep every nutrient intact.</p>
+            <span class="ing">Kale ・ Celery ・ Cucumber ・ Green Apple</span>
+            <div class="meta"><span class="kcal">160 kcal</span><span class="price">₹295</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="juice">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1638176066666-ffb2f013c7dd?auto=format&fit=crop&w=800&q=80" alt="Ruby red apple and beetroot juice" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">RR</div>
+            <span class="tag">Cold-Pressed</span>
+          </div>
+          <div class="card-body">
+            <h3>Ruby Rush</h3>
+            <p>Crisp apple with earthy beetroot — a blush-red glass of natural energy.</p>
+            <span class="ing">Apple ・ Beetroot ・ Lemon</span>
+            <div class="meta"><span class="kcal">200 kcal</span><span class="price">₹245</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal d1" data-cat="juice">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=800&q=80" alt="Orange and carrot sunrise juice" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">SG</div>
+            <span class="tag">Cold-Pressed</span>
+          </div>
+          <div class="card-body">
+            <h3>Sunrise Glow</h3>
+            <p>An immunity-boosting citrus classic, bright with carrot sweetness.</p>
+            <span class="ing">Orange ・ Carrot ・ Ginger</span>
+            <div class="meta"><span class="kcal">187 kcal</span><span class="price">₹245</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal d2" data-cat="juice">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1553787499-6f9133860278?auto=format&fit=crop&w=800&q=80" alt="Purple cabbage anthocyanin-rich juice" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">VV</div>
+            <span class="tag">Cold-Pressed</span>
+          </div>
+          <div class="card-body">
+            <h3>Violet Vitality</h3>
+            <p>Anthocyanin-rich purple cabbage mellowed with grape and apple.</p>
+            <span class="ing">Purple Cabbage ・ Grape ・ Apple</span>
+            <div class="meta"><span class="kcal">192 kcal</span><span class="price">₹275</span></div>
+          </div>
+        </article>
+
+        <!-- HYDRATE -->
+        <article class="card reveal" data-cat="hydrate">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=800&q=80" alt="Cooling cucumber and mint hydrator" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">CC</div>
+            <span class="tag">Hydrate</span>
+          </div>
+          <div class="card-body">
+            <h3>Cool Cucumber</h3>
+            <p>A cooling, hydrating blend of cucumber and mint over a hint of lime.</p>
+            <span class="ing">Cucumber ・ Mint ・ Lime</span>
+            <div class="meta"><span class="kcal">110 kcal</span><span class="price">₹145</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal d1" data-cat="hydrate">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1481349518771-20055b2a7b24?auto=format&fit=crop&w=800&q=80" alt="Electrolyte-rich coconut water hydrator" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">EE</div>
+            <span class="tag">Hydrate</span>
+          </div>
+          <div class="card-body">
+            <h3>Electrolyte Elixir</h3>
+            <p>Refreshing, electrolyte-rich coconut water lifted with lime and sea salt.</p>
+            <span class="ing">Coconut Water ・ Lime ・ Sea Salt</span>
+            <div class="meta"><span class="kcal">110 kcal</span><span class="price">₹145</span></div>
+          </div>
+        </article>
+
+        <!-- SUPERMATCHA -->
+        <article class="card reveal d1" data-cat="matcha">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=800&q=80" alt="Classic ceremonial supermatcha latte" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">SM</div>
+            <span class="tag">Supermatcha</span>
+          </div>
+          <div class="card-body">
+            <h3>Classic Supermatcha</h3>
+            <p>Ceremonial-grade matcha whisked into silky oat milk. Our signature.</p>
+            <span class="ing">Ceremonial Matcha ・ Oat Milk</span>
+            <div class="meta"><span class="kcal">123 kcal</span><span class="price">₹345</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal d2" data-cat="matcha">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1553530979-7ee52a2670c4?auto=format&fit=crop&w=800&q=80" alt="Strawberry supermatcha latte" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">SB</div>
+            <span class="tag">Supermatcha</span>
+          </div>
+          <div class="card-body">
+            <h3>Strawberry Supermatcha</h3>
+            <p>Ceremonial matcha layered over fresh strawberry purée — pretty in pink.</p>
+            <span class="ing">Ceremonial Matcha ・ Strawberry ・ Milk</span>
+            <div class="meta"><span class="kcal">175 kcal</span><span class="price">₹375</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="matcha">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=800&q=80" alt="Blueberry supermatcha latte" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">BM</div>
+            <span class="tag">Supermatcha</span>
+          </div>
+          <div class="card-body">
+            <h3>Blueberry Supermatcha</h3>
+            <p>Ceremonial matcha meets a violet swirl of blueberry — as good as it looks.</p>
+            <span class="ing">Ceremonial Matcha ・ Blueberry ・ Milk</span>
+            <div class="meta"><span class="kcal">175 kcal</span><span class="price">₹375</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal d2" data-cat="smoothie">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=800&q=80" alt="Berry blast smoothie with mixed berries" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">BB</div>
+            <span class="tag">Smoothie</span>
+          </div>
+          <div class="card-body">
+            <h3>Berry Blast</h3>
+            <p>A berry-loaded blend with a hint of vanilla — sweet without added sugar.</p>
+            <span class="ing">Strawberry ・ Blueberry ・ Yogurt ・ Vanilla</span>
+            <div class="meta"><span class="kcal">146 kcal</span><span class="price">₹375</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="smoothie">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?auto=format&fit=crop&w=800&q=80" alt="Tropical coconut water smoothie" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">TT</div>
+            <span class="tag">Smoothie</span>
+          </div>
+          <div class="card-body">
+            <h3>Tropical Tide</h3>
+            <p>Coconut water, pineapple and mango blended into island weather.</p>
+            <span class="ing">Coconut Water ・ Pineapple ・ Mango</span>
+            <div class="meta"><span class="kcal">110 kcal</span><span class="price">₹345</span></div>
+          </div>
+        </article>
+
+        <!-- PROTEIN -->
+        <article class="card reveal d1" data-cat="protein">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1610970881699-44a5587cabec?auto=format&fit=crop&w=800&q=80" alt="Spinach banana protein smoothie" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">GP</div>
+            <span class="tag">Protein Blend</span>
+          </div>
+          <div class="card-body">
+            <h3>Green Protein Power</h3>
+            <p>A protein-rich plant blend that actually tastes like dessert, not duty.</p>
+            <span class="ing">Spinach ・ Banana ・ Plant Protein ・ Almond Milk</span>
+            <div class="meta"><span class="kcal">351 kcal</span><span class="price">₹295 <small>/ ₹385 large</small></span></div>
+          </div>
+        </article>
+
+        <article class="card reveal d2" data-cat="protein">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1638176066666-ffb2f013c7dd?auto=format&fit=crop&w=800&q=80" alt="Beet powder recovery protein shake" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">BR</div>
+            <span class="tag">Protein Blend</span>
+          </div>
+          <div class="card-body">
+            <h3>Beet Recovery</h3>
+            <p>Antioxidant-rich beet powder and berries built for post-workout recovery.</p>
+            <span class="ing">Beet Powder ・ Berries ・ Whey Protein</span>
+            <div class="meta"><span class="kcal">349 kcal</span><span class="price">₹375 <small>/ ₹465 large</small></span></div>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="protein">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&w=800&q=80" alt="Peanut butter power protein shake" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">PB</div>
+            <span class="tag">Protein Blend</span>
+          </div>
+          <div class="card-body">
+            <h3>Peanut Butter Punch</h3>
+            <p>Sesame-peanut power with banana and oats — a full meal in a bottle.</p>
+            <span class="ing">Peanut Butter ・ Banana ・ Oats ・ Whey Protein</span>
+            <div class="meta"><span class="kcal">508 kcal</span><span class="price">₹375 <small>/ ₹465 large</small></span></div>
+          </div>
+        </article>
+
+        <article class="card reveal d1" data-cat="protein">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=800&q=80" alt="Dark cocoa endorphin protein shake" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">CK</div>
+            <span class="tag">Protein Blend</span>
+          </div>
+          <div class="card-body">
+            <h3>Cocoa Kick</h3>
+            <p>Dark cocoa and dates deliver an endorphin kick with clean protein.</p>
+            <span class="ing">Dark Cocoa ・ Dates ・ Banana ・ Whey Protein</span>
+            <div class="meta"><span class="kcal">428 kcal</span><span class="price">₹375 <small>/ ₹465 large</small></span></div>
+          </div>
+        </article>
+
+        <!-- SANDWICHES & WRAPS -->
+        <article class="card reveal d2" data-cat="food">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80" alt="Grilled vegetable sandwich" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">GS</div>
+            <span class="tag">Sandwich</span>
+          </div>
+          <div class="card-body">
+            <h3>Grilled Veggie Sandwich</h3>
+            <p>Charred seasonal vegetables and herbed spread on toasted multigrain.</p>
+            <span class="ing">Multigrain Bread ・ Grilled Veggies ・ Herb Spread</span>
+            <div class="meta"><span class="kcal">380 kcal</span><span class="price">₹250</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="food">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=800&q=80" alt="Peanut butter banana toast" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">PT</div>
+            <span class="tag">Sandwich</span>
+          </div>
+          <div class="card-body">
+            <h3>Peanut Butter Banana Toast</h3>
+            <p>Stone-ground peanut butter, banana coins and honey on sourdough.</p>
+            <span class="ing">Sourdough ・ Peanut Butter ・ Banana ・ Honey</span>
+            <div class="meta"><span class="kcal">380 kcal</span><span class="price">₹175</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal d1" data-cat="food">
+          <div class="card-img">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80" alt="Fresh falafel and hummus wrap" onerror="this.parentElement.classList.add('broken')" />
+            <div class="fallback">FW</div>
+            <span class="tag">Wrap</span>
+          </div>
+          <div class="card-body">
+            <h3>Falafel Hummus Wrap</h3>
+            <p>Crisp falafel, creamy hummus and crunchy salad in a whole-wheat wrap.</p>
+            <span class="ing">Whole-Wheat Wrap ・ Falafel ・ Hummus ・ Salad</span>
+            <div class="meta"><span class="kcal">420 kcal</span><span class="price">₹375</span></div>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="menu-note">All blends are prepared fresh on order. Prices are inclusive of taxes. Nutritional values are approximate per serving.</p>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow" style="background:transparent;color:var(--citrus);border-color:rgba(243,247,240,.25)">Why Hii Blend</span>
+        <h2>Fresh isn't a flavour. It's a deadline.</h2>
+        <p>Every bottle moves from press to your hands within 24 hours — or it doesn't leave our kitchen.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal"><span class="ico">🥬</span><h3>Whole produce only</h3><p>No concentrates, no syrups, no "natural-identical" anything. If it isn't a fruit, vegetable, nut or spice, it isn't in the bottle.</p></div>
+        <div class="why-card reveal d1"><span class="ico">❄️</span><h3>Cold-pressed, cold-kept</h3><p>Slow hydraulic pressing keeps enzymes and nutrients intact, and the cold chain holds until the moment you open it.</p></div>
+        <div class="why-card reveal d2"><span class="ico">🧾</span><h3>Full transparency</h3><p>Ingredients, calories and price on every item. What's on the label is exactly what's in the glass.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="frame reveal">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80" alt="Fresh produce used at Hii Blend" onerror="this.style.display='none'" />
+      </div>
+      <div class="about-copy reveal d1">
+        <span class="eyebrow">About us</span>
+        <h2>Made by people who read ingredient labels</h2>
+        <p>Hii Blend started with a simple frustration: "healthy" drinks that were mostly sugar, water and marketing. So we built a menu the way we'd want it as customers — real produce, honest portions, and every number printed where you can see it.</p>
+        <p>Today we press, blend and bottle daily, in small batches, from our outlet at <strong>Second Floor, Building 8, Khan Market, New Delhi</strong> — with indoor seating for dine-in and home delivery across nearby areas. From a 60&nbsp;ml immunity shot to a supermatcha or a full-meal wrap, everything is made fresh on order.</p>
+        <a href="#contact" class="btn" style="margin-top:10px">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Contact</span>
+        <h2>Questions, feedback or bulk orders?</h2>
+        <p>We reply within one business day.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card reveal"><h3>📞 Phone / WhatsApp</h3><p>Open daily from 7:00 AM<br/><a href="tel:+918527294693">+91 85272 94693</a></p></div>
+        <div class="contact-card reveal d1"><h3>📍 Visit us</h3><p>Hii Blend<br/>Second Floor, Building 8,<br/>Khan Market, New Delhi 110003</p></div>
+        <div class="contact-card reveal d2"><h3>📧 Email</h3><p>For orders, support and refunds<br/><a href="mailto:hello@hiiblend.com">hello@hiiblend.com</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POLICIES -->
+  <section id="policies">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Legal</span>
+        <h2>Our policies</h2>
+        <p>Everything you should know before ordering — plainly written, no fine-print tricks.</p>
+      </div>
+
+      <details class="policy reveal" id="terms">
+        <summary>Terms &amp; Conditions</summary>
+        <div class="policy-body">
+          <p>By accessing this website and placing an order with Hii Blend ("we", "us", "our"), you agree to the following terms:</p>
+          <h4>1. Products &amp; pricing</h4>
+          <p>All products listed are freshly prepared beverages. Prices are displayed in Indian Rupees (₹) and are inclusive of applicable taxes unless stated otherwise. We reserve the right to revise the menu and prices at any time; the price applicable to your order is the price displayed at the time of purchase.</p>
+          <h4>2. Orders &amp; payment</h4>
+          <p>Orders are confirmed only after successful payment. Payments on this website are processed securely through Razorpay. We do not store your card, UPI or banking details on our servers.</p>
+          <h4>3. Accuracy of information</h4>
+          <p>Nutritional values (calories, ingredients) are approximate and provided in good faith. If you have allergies (e.g., nuts, dairy), please review the listed ingredients or contact us before ordering.</p>
+          <h4>4. Use of website</h4>
+          <p>You agree not to misuse this website, attempt unauthorised access, or use content from it for commercial purposes without written permission.</p>
+          <h4>5. Limitation of liability</h4>
+          <p>To the maximum extent permitted by law, our liability for any claim arising from an order is limited to the amount paid for that order.</p>
+          <h4>6. Governing law</h4>
+          <p>These terms are governed by the laws of India. Any disputes are subject to the exclusive jurisdiction of the courts at New Delhi.</p>
+        </div>
+      </details>
+
+      <details class="policy reveal" id="privacy">
+        <summary>Privacy Policy</summary>
+        <div class="policy-body">
+          <p>Your privacy matters to us. This policy explains what we collect and how we use it.</p>
+          <h4>Information we collect</h4>
+          <ul>
+            <li>Contact details you provide when ordering: name, phone number, email and delivery address.</li>
+            <li>Order history and preferences, to serve you better.</li>
+            <li>Payment is handled entirely by Razorpay; we never see or store your card, UPI or bank credentials.</li>
+          </ul>
+          <h4>How we use it</h4>
+          <ul>
+            <li>To process, prepare and deliver your orders.</li>
+            <li>To contact you about your order status or respond to your queries.</li>
+            <li>To improve our menu and service.</li>
+          </ul>
+          <h4>What we don't do</h4>
+          <p>We do not sell, rent or trade your personal information to third parties. Data is shared only with service providers strictly necessary to fulfil your order (e.g., payment gateway, delivery partner).</p>
+          <h4>Data security &amp; your rights</h4>
+          <p>We take reasonable technical measures to protect your data. You may request access to, correction of, or deletion of your personal data at any time by writing to <a href="mailto:hello@hiiblend.com">hello@hiiblend.com</a>.</p>
+        </div>
+      </details>
+
+      <details class="policy reveal" id="refunds">
+        <summary>Cancellation &amp; Refund Policy</summary>
+        <div class="policy-body">
+          <h4>Cancellations</h4>
+          <p>Because every blend is prepared fresh on order, cancellations are accepted only <strong>before preparation begins</strong> — typically within 10 minutes of placing the order. To cancel, call or WhatsApp us immediately at <a href="tel:+918527294693">+91 85272 94693</a> with your order details.</p>
+          <h4>Refunds</h4>
+          <ul>
+            <li><strong>Order cancelled in time:</strong> full refund to the original payment method.</li>
+            <li><strong>Wrong, damaged or spoiled item delivered:</strong> full refund or free replacement — share a photo with us within 2 hours of delivery.</li>
+            <li><strong>Order not delivered:</strong> full refund.</li>
+          </ul>
+          <h4>Refund timeline</h4>
+          <p>Approved refunds are initiated within 24–48 hours and are credited to your original payment method within <strong>5–7 business days</strong>, depending on your bank. Refunds are processed via Razorpay.</p>
+          <p>For any refund-related query, write to <a href="mailto:hello@hiiblend.com">hello@hiiblend.com</a> with your order ID.</p>
+        </div>
+      </details>
+
+      <details class="policy reveal" id="shipping">
+        <summary>Shipping &amp; Delivery Policy</summary>
+        <div class="policy-body">
+          <h4>Delivery area</h4>
+          <p>We prepare and deliver from our outlet at Second Floor, Building 8, Khan Market, New Delhi. We currently serve Khan Market and nearby areas of Central and South Delhi; serviceability is confirmed at checkout based on your delivery address.</p>
+          <h4>Delivery timelines</h4>
+          <ul>
+            <li>Standard orders are prepared and delivered within <strong>45–90 minutes</strong> of confirmation during operating hours (daily, from 7:00 AM).</li>
+            <li>Pre-orders and bulk orders are delivered at the slot chosen during ordering.</li>
+          </ul>
+          <h4>Delivery charges</h4>
+          <p>Any delivery charge applicable to your location is displayed clearly at checkout before payment.</p>
+          <h4>Cold-chain handling</h4>
+          <p>All products are transported chilled. Please refrigerate immediately on receipt and consume within 24 hours for best taste and nutrition.</p>
+          <h4>Failed deliveries</h4>
+          <p>If we cannot reach you at the provided address or phone number, our team will attempt to contact you. If delivery fails for reasons attributable to us, you receive a full refund.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="logo"><span class="dot"></span>Hii Blend</a>
+        <p>Cold-pressed juices, wellness shots, supermatcha, smoothies, sandwiches &amp; wraps — pressed and prepared fresh daily at Khan Market, New Delhi.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#why">Why Hii Blend</a></li>
+          <li><a href="#about">About us</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="#terms" data-open-policy="terms">Terms &amp; Conditions</a></li>
+          <li><a href="#privacy" data-open-policy="privacy">Privacy Policy</a></li>
+          <li><a href="#refunds" data-open-policy="refunds">Cancellation &amp; Refunds</a></li>
+          <li><a href="#shipping" data-open-policy="shipping">Shipping &amp; Delivery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Reach us</h4>
+        <ul>
+          <li><a href="tel:+918527294693">+91 85272 94693</a></li>
+          <li><a href="mailto:hello@hiiblend.com">hello@hiiblend.com</a></li>
+          <li>Second Floor, Building 8,<br/>Khan Market, New Delhi 110003</li>
+          <li>Open daily from 7:00 AM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Hii Blend. All rights reserved.</span>
+      <span>Payments secured by Razorpay 🔒</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Duplicate ticker content for a seamless loop
+  const track = document.getElementById('ticker');
+  track.innerHTML += track.innerHTML;
+
+  // Sticky header shadow
+  const header = document.getElementById('header');
+  addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 8), {passive:true});
+
+  // Mobile nav
+  const burger = document.getElementById('burger');
+  const navlinks = document.getElementById('navlinks');
+  burger.addEventListener('click', () => navlinks.classList.toggle('open'));
+  navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open')));
+
+  // Scroll reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+
+  // Menu filters with a soft fade
+  const chips = document.querySelectorAll('.chip');
+  const cards = document.querySelectorAll('#menuGrid .card');
+  chips.forEach(chip => chip.addEventListener('click', () => {
+    chips.forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    const f = chip.dataset.filter;
+    cards.forEach(card => {
+      const show = f === 'all' || card.dataset.cat === f;
+      if (show) {
+        card.classList.remove('hide');
+        card.style.opacity = 0;
+        requestAnimationFrame(() => requestAnimationFrame(() => card.style.opacity = 1));
+      } else {
+        card.classList.add('hide');
+      }
+    });
+  }));
+
+  // Footer policy links: open the accordion they point to
+  document.querySelectorAll('[data-open-policy]').forEach(a => {
+    a.addEventListener('click', () => {
+      const d = document.getElementById(a.dataset.openPolicy);
+      if (d) d.open = true;
+    });
+  });
+</script>
+</body>
+</html>
